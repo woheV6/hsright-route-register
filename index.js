@@ -6,7 +6,7 @@ try {
    console.log('error',error)
 }
 import axios from 'axios'
-import md5 from 'md5-node'
+import md5 from 'js-md5'
 import UTF8 from 'utf8'
 function registerAppMenu (authApi,appMenu=routeMenu.appMenu) {
   if(!authApi){
