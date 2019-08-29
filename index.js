@@ -10,7 +10,7 @@ import md5 from 'js-md5'
 import UTF8 from 'utf8'
 function registerAppMenu (authApi,appMenu=routeMenu.appMenu) {
   if(!authApi){
-    console.error('stop----注册时authApi没有传递!请检查调用registerAppMenu时是否传入了authApi')
+    console.error('stop----注册时authApi没有传递!请检查调用registerAppMenu时是否传入了authApi',`authApi:${authApi}`)
     return
   }
   if(!appMenu||!Object.keys(appMenu).length){
@@ -26,7 +26,7 @@ function registerAppMenu (authApi,appMenu=routeMenu.appMenu) {
     axios.defaults.headers.common['authkey'] = aa
     console.log('appMenu',appMenu)
     axios.post(`${authApi}/permission/`, appMenu).then((res) => {
-        console.log('hsright---注册成功---')
+      console.log('---成功回调---',res.data&&res.data.message)
     }).catch((e)=>{
         console.log('--路由注册报错啦---',e.code)
     })
