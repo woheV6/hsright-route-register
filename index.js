@@ -26,6 +26,7 @@ function registerAppMenu (authApi,appMenu=routeMenu.appMenu) {
     axios.defaults.headers.common['authkey'] = aa
     console.log('appMenu',appMenu)
     axios.post(`${authApi}/permission/`, appMenu).then((res) => {
+      console.log(res.data)
       console.log('---成功回调---',res.data&&res.data.message)
     }).catch((e)=>{
         console.log('--路由注册报错啦---',e.code)
