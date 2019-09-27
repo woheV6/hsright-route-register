@@ -8,8 +8,21 @@ try {
 import axios from 'axios'
 import md5 from 'js-md5'
 import UTF8 from 'utf8'
-function registerAppMenu (authApi,appMenu=routeMenu.appMenu) {
-  if(!authApi){
+function registerAppMenu (apiObj,appMenu=routeMenu.appMenu) {
+  const type = typeof apiObj
+  var var_data = {}
+  var register_api = ''
+  if(type==='object'){
+    register_api = apiObj.register_api
+    var_data=Object.assign(apiObj)
+  }else{
+    register_api=apiObj
+    var_data={
+      register_api
+    }
+  }
+
+  if(!register_api){
     console.error('stop----注册时authApi没有传递!请检查调用registerAppMenu时是否传入了authApi',`authApi:${authApi}`)
     return
   }
@@ -24,17 +37,7 @@ function registerAppMenu (authApi,appMenu=routeMenu.appMenu) {
     )
     aa = aa + '|' + time
     axios.defaults.headers.common['authkey'] = aa
-    console.log('appMenu',appMenu)
-    return axios.post(`${authApi}/permission/`, appMenu)
-    // .then((res) => {
-    //   if(res.data){
-    //     console.log('---成功回调---',res.data.message)
-    //     console.log('---app信息---',appMenu.app)
-    //   }else{
-    //     console.log('res.data未返回数据')
-    //   }
-    // }).catch((e)=>{
-    //     console.log('--路由注册报错啦---',e.code)
-    // })
+    appMenu.var_data = JSON.stringify(var_data)
+    return axios.post(`${register_api}/permission/`, appMenu)
   }
 export default {registerAppMenu}
