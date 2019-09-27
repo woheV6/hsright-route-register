@@ -11,18 +11,18 @@ import UTF8 from 'utf8'
 function registerAppMenu (apiObj,appMenu=routeMenu.appMenu) {
   const type = typeof apiObj
   var var_data = {}
-  var register_api = ''
+  var registerApi = ''
   if(type==='object'){
-    register_api = apiObj.register_api
+    registerApi = apiObj.registerApi
     var_data=Object.assign(apiObj)
   }else{
-    register_api=apiObj
+    registerApi=apiObj
     var_data={
-      register_api
+      registerApi
     }
   }
 
-  if(!register_api){
+  if(!registerApi){
     console.error('stop----注册时authApi没有传递!请检查调用registerAppMenu时是否传入了authApi',`authApi:${authApi}`)
     return
   }
@@ -38,6 +38,6 @@ function registerAppMenu (apiObj,appMenu=routeMenu.appMenu) {
     aa = aa + '|' + time
     axios.defaults.headers.common['authkey'] = aa
     appMenu.var_data = JSON.stringify(var_data)
-    return axios.post(`${register_api}/permission/`, appMenu)
+    return axios.post(`${registerApi}/permission/`, appMenu)
   }
 export default {registerAppMenu}
